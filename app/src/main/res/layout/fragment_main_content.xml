@@ -6,29 +6,53 @@
               tools:context=".fragments.MainContentFragment" android:orientation="vertical">
 
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="nombre"
-            android:id="@+id/frag_nombre"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="3" android:orientation="horizontal" android:gravity="center">
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="experiencia"
-            android:id="@+id/frag_experiencia"/>
+        <ImageView android:layout_width="200dp" android:layout_height="200dp" android:id="@+id/iv_pokemon2" android:layout_margin="8dp"
+        />
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="altura"
-            android:id="@+id/frag_altura"/>
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="peso"
-            android:id="@+id/frag_peso"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="horizontal" android:gravity="center">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textSize="25dp"
+                  android:text="Nombre: " android:textColor="@color/colorPrimary" android:fontFamily="casual"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="25dp"
+                  android:id="@+id/frag_nombre" android:textColor="@color/colorPrimary" android:fontFamily="casual"/>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout android:layout_width="match_parent" android:gravity="center" android:layout_height="0dp" android:layout_weight="1" android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="25dp"
+                  android:text="Experiencia: " android:textColor="@color/colorPrimary" android:fontFamily="casual"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="25dp"
+                  android:id="@+id/frag_experiencia" android:textColor="@color/colorPrimary" android:fontFamily="casual"/>
+
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:gravity="center" android:layout_height="0dp" android:layout_weight="1" android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="25dp"
+                  android:text=" Altura: "   android:textColor="@color/colorPrimary" android:fontFamily="casual"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="25dp"
+                  android:id="@+id/frag_altura" android:textColor="@color/colorPrimary" android:fontFamily="casual"/>
+
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:gravity="center" android:layout_height="0dp" android:layout_weight="1" android:orientation="horizontal">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="25dp"
+                  android:text=" Peso: " android:textColor="@color/colorPrimary" android:fontFamily="casual"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="25dp"
+                  android:id="@+id/frag_peso" android:textColor="@color/colorPrimary" android:fontFamily="casual"/>
+
+    </LinearLayout>
+
+
+
+
+
+
 
 
 </LinearLayout>

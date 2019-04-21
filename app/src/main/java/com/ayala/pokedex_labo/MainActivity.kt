@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewMovieListene
         mIntent.putExtra("key_peso", pokemon.peso)
         mIntent.putExtra("key_experiencia", pokemon.experiencia)
         mIntent.putExtra("key_altura", pokemon.altura)
+        mIntent.putExtra("key_id", pokemon.id)
         this.startActivity(mIntent)
         //movieBundle.putParcelable("MOVIE", pokemon)
         //startActivity(Intent(this, SecondActivity::class.java).putExtra("key_nombre", pokemon.name ).putExtra("key_experiencia", pokemon.experiencia).putExtra("key_altura", pokemon.altura).putExtra("key_peso", pokemon.peso))
