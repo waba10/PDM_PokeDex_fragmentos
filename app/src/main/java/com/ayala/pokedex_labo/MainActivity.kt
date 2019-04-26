@@ -23,20 +23,16 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewMovieListene
         //val movieBundle = Bundle()
 
         var mIntent = Intent(this,  SecondActivity:: class.java)
-        mIntent.putExtra("key_nombre", pokemon.name)
-        mIntent.putExtra("key_peso", pokemon.peso)
-        mIntent.putExtra("key_experiencia", pokemon.experiencia)
-        mIntent.putExtra("key_altura", pokemon.altura)
-        mIntent.putExtra("key_id", pokemon.id)
+        mIntent.putExtra("poke", pokemon)
         this.startActivity(mIntent)
         //movieBundle.putParcelable("MOVIE", pokemon)
         //startActivity(Intent(this, SecondActivity::class.java).putExtra("key_nombre", pokemon.name ).putExtra("key_experiencia", pokemon.experiencia).putExtra("key_altura", pokemon.altura).putExtra("key_peso", pokemon.peso))
     }
-/*
+
     override fun manageLandscapeItemClick(pokemon: Pokemon) {
         mainContentFragment = MainContentFragment.newInstance(pokemon)
         changeFragment(R.id.land_main_cont_fragment, mainContentFragment)
-    }*/
+    }
 
 
     override fun searchMovie(pokeName: String) {
@@ -52,25 +48,27 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewMovieListene
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        pokemonList = savedInstanceState?.getParcelableArrayList<Pokemon>(AppConstants.MAIN_LIST_KEY)?: ArrayList()
+
         initMainFragment()
 
-        FetchPokemonTask().execute()
+        //FetchPokemonTask().execute()
 
-        //pokemonList = savedInstanceState?.getParcelableArrayList(AppConstants.dataset_saveinstance_key) as ArrayList<Pokemon>?
-        //    ?: ArrayList()
+
     }
 
     fun initMainFragment(){
         mainFragment = MainListFragment.newInstance(pokemonList)
 
-        val resource =// if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+        val resource =if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
             R.id.main_fragment
-        /*else {
+        else {
+
             mainContentFragment = MainContentFragment.newInstance(Pokemon())
             changeFragment(R.id.land_main_cont_fragment, mainContentFragment)
 
             R.id.land_main_fragment
-        }*/
+        }
 
         changeFragment(resource, mainFragment)
     }
@@ -83,8 +81,10 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewMovieListene
     }
 
 
-
-
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.putParcelableArrayList(AppConstants.MAIN_LIST_KEY, pokemonList)
+        super.onSaveInstanceState(outState)
+    }
 
 
     private fun changeFragment(id: Int, frag: Fragment){ supportFragmentManager.beginTransaction().replace(id, frag).commit() }

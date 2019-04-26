@@ -18,9 +18,6 @@ import java.lang.reflect.Array
 
 class MainListFragment : Fragment() {
 
-
-
-
    private lateinit var  pokemones :ArrayList<Pokemon>
     private lateinit var pokemonesAdapter : MyPokemonAdapter
     var listenerTool :  SearchNewMovieListener? = null
@@ -38,6 +35,7 @@ class MainListFragment : Fragment() {
 
         fun searchMovie(pokeName: String)
         fun managePortraitItemClick(pokemon: Pokemon)
+        fun manageLandscapeItemClick(pokemon: Pokemon)
 
 
     }
@@ -49,7 +47,8 @@ class MainListFragment : Fragment() {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_main_list, container, false)
 
-        //if(savedInstanceState != null) pokemones = savedInstanceState.getParcelableArrayList<Pokemon>(AppConstants.MAIN_LIST_KEY)!!
+        if(savedInstanceState != null) pokemones = savedInstanceState.getParcelableArrayList<Pokemon>(AppConstants.MAIN_LIST_KEY)?: ArrayList()
+
 
         initRecyclerView(resources.configuration.orientation, view)
 
@@ -67,10 +66,10 @@ class MainListFragment : Fragment() {
             pokemonesAdapter = PokemonAdapter(pokemones, {pokemon:Pokemon->listenerTool?.managePortraitItemClick(pokemon)})
             container.movie_list_rv.adapter = pokemonesAdapter as PokemonAdapter
         }
-        /*if(orientation == Configuration.ORIENTATION_LANDSCAPE){
-            pokemonesAdapter = MovieSimpleListAdapter(pokemones, {pokemon:Pokemon->listenerTool?.manageLandscapeItemClick(pokemon)})
-            container.movie_list_rv.adapter = pokemonesAdapter as MovieSimpleListAdapter
-        }*/
+        if(orientation == Configuration.ORIENTATION_LANDSCAPE){
+            pokemonesAdapter = PokemonAdapter(pokemones, { pokemon:Pokemon->listenerTool?.manageLandscapeItemClick(pokemon)})
+            container.movie_list_rv.adapter = pokemonesAdapter as PokemonAdapter
+        }
 
         container.movie_list_rv.apply {
             setHasFixedSize(true)
@@ -78,6 +77,17 @@ class MainListFragment : Fragment() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelableArrayList(AppConstants.MAIN_LIST_KEY, pokemones)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        if (savedInstanceState != null) {
+            pokemones = savedInstanceState.getParcelableArrayList<Pokemon>(AppConstants.MAIN_LIST_KEY)!!
+        }
+    }
 
     fun initSearchButton(container:View) = container.add_pokemon_btn.setOnClickListener {
         listenerTool?.searchMovie(pokemon_name_et.text.toString())

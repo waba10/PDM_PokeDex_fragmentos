@@ -17,35 +17,48 @@ import kotlinx.android.synthetic.main.fragment_main_content.view.*
 
 class MainContentFragment : Fragment() {
 
-    /*var pokemon = Pokemon(1, "hola", "https//google.com", 12, 12 ,12 )
+    var pokemon = Pokemon()
 
     companion object {
+
+
+    /*fun newInstance(index:Int):MainContentFragment{
+        val f=MainContentFragment()
+
+        val args=Bundle()
+        args.putInt("INDEX",index)
+        f.arguments=args
+
+        return f
+    }*/
         fun newInstance(pokemon: Pokemon): MainContentFragment{
             val newFragment = MainContentFragment()
             newFragment.pokemon = pokemon
             return newFragment
         }
-    }*/
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_content, container, false).apply {
+         val view=inflater.inflate(R.layout.fragment_main_content, container, false).apply {
 
-            val aux=arguments?.getInt("key_id")
+            val aux= pokemon.id
             Glide.with(this)
                 .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$aux.png")
                 .into(iv_pokemon2)
-            findViewById<TextView>(R.id.frag_nombre).text = arguments?.getString("key_nombre").toString()
+            findViewById<TextView>(R.id.frag_nombre).text = pokemon.name
             Log.d("Datos", arguments?.getInt("key_experiencia").toString())
-            findViewById<TextView>(R.id.frag_experiencia).text = arguments?.getInt("key_experiencia").toString()
+            findViewById<TextView>(R.id.frag_experiencia).text = pokemon.experiencia.toString()
             Log.d("Datos", arguments?.getInt("key_altura").toString())
-            findViewById<TextView>(R.id.frag_altura).text = arguments?.getInt("key_altura").toString()
+            findViewById<TextView>(R.id.frag_altura).text = pokemon.altura.toString()
             Log.d("Datos", arguments?.getInt("key_experiencia").toString())
-            findViewById<TextView>(R.id.frag_peso).text = arguments?.getInt("key_peso").toString()
+            findViewById<TextView>(R.id.frag_peso).text = pokemon.peso.toString()
         }
+
+        return view
     }
 
 
