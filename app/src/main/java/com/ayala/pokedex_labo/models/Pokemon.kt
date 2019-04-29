@@ -3,7 +3,7 @@ package com.ayala.pokedex_labo.models
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Pokemon (val id:Int=1, val name:String="", var experiencia:Int=0, var altura:Int=0, var peso:Int=0): Parcelable {
+data class Pokemon (val id:Int=0, val name:String="", var experiencia:Int=0, var altura:Int=0, var peso:Int=0): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString(),
